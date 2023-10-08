@@ -42,18 +42,18 @@
         },
         {
             "steering_angle": 20,
-            "speed": 2.3
+            "speed": 1.7
         },
         {
             "steering_angle": 20,
-            "speed": 3.3
+            "speed": 2.7
         },
         {
             "steering_angle": 30,
             "speed": 1.3
         },
         {
-            "steering_angle": -30,
+            "steering_angle": 30,
             "speed": 2.3
         }
     ],

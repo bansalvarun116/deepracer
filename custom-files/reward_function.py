@@ -76,20 +76,6 @@ class Reward:
                         bonus = 18
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
-            elif (waypoint >= 145 and waypoint<160):
-                if  steering_angle >= 0:
-                    if speed  > 3 :
-                        bonus = 20
-                    elif speed > 2.5:
-                        bonus = 17
-                    elif speed > 2:
-                        bonus=15
-                    elif speed>1.5:
-                        bonus= 7
-                    else:
-                        bonus = 5
-                    if(steering_angle==self.previous_steering_angle):
-                        steering_bonus=10*min(20,self.count)
             else:
                 if  steering_angle >= 0:
                     if speed  > 3 :
@@ -111,16 +97,17 @@ class Reward:
             else:
                 self.previous_steering_angle=steering_angle
                 self.count=0
-            if params['progress'] ==100 and params['steps']<375:
-                steps_reward=25000
-            elif params['progress'] ==100 and params['steps']<400:
-                steps_reward=20000
-            elif params['progress'] ==100 and params['steps']<450:
-                steps_reward=17500
-            elif params['progress'] ==100 and params['steps']<450:
-                steps_reward=15000
-            elif params['progress'] ==100 and params['steps']<500:
-                steps_reward=10000
+            if params['progress'] ==100:
+                if  params['steps']<375:
+                    steps_reward=25000
+                elif  params['steps']<400:
+                    steps_reward=20000
+                elif  params['steps']<450:
+                    steps_reward=17500
+                elif  params['steps']<450:
+                    steps_reward=15000
+                elif  params['steps']<500:
+                    steps_reward=10000
                 
             return   float(0.00001+bonus*10  + corner_reward + steering_bonus+steps_reward)
         return (0.00001)

@@ -78,7 +78,7 @@ class Reward:
                         bonus = 14
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
-                    if(params["is_left_of_center"]):
+                    if(not params["is_left_of_center"]):
                         corner_reward=100
             else:
                 if  steering_angle >= 0:

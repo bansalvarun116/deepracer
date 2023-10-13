@@ -12,7 +12,6 @@ class Reward:
             speed= params['speed']
             steering_angle = params['steering_angle']
             steps_reward=0
-            reward=0
             
             if waypoint<20 or waypoint>201  or (waypoint>114 and waypoint<134) or (waypoint>159 and waypoint<172) or(waypoint>51 and waypoint<56):
                 reward =(params['progress']/params['steps'])*200

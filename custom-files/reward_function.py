@@ -62,8 +62,6 @@ class Reward:
                         bonus = 5
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
-                    if(not params["is_left_of_center"]):
-                        corner_reward=100
             elif (waypoint > 98 and waypoint < 145):
                 if  steering_angle < -10:
                     if speed >3:
@@ -78,8 +76,6 @@ class Reward:
                         bonus = 14
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
-                    if(params["is_left_of_center"]):
-                        corner_reward=100
             else:
                 if  steering_angle >= 0:
                     if speed  > 3 :
@@ -94,8 +90,6 @@ class Reward:
                         bonus = 2
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
-                    if(params["is_left_of_center"]):
-                        corner_reward=100
             if(steering_angle==self.previous_steering_angle):
                 self.count=self.count+1
             else:
@@ -113,7 +107,7 @@ class Reward:
                 elif params['steps']<500:
                     steps_reward=10000
                 
-            return   float(0.00001+bonus*10  + corner_reward+ steering_bonus+steps_reward)
+            return   float(0.00001+bonus*10  + steering_bonus+steps_reward)
         return (0.00001)
 reward = Reward()
 def reward_function(params):

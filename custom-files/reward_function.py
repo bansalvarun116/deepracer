@@ -12,8 +12,9 @@ class Reward:
             speed= params['speed']
             steering_angle = params['steering_angle']
             steps_reward=0
-            
+            reward=0
             if waypoint<20 or waypoint>201  or (waypoint>115 and waypoint<133) or (waypoint>160 and waypoint<172) or(waypoint>51 and waypoint<56):
+                reward =(params['progress']/params['steps'])*200
                 if steering_angle == 0 :
                     if speed == 4 :
                         bonus = 30
@@ -33,6 +34,7 @@ class Reward:
                 if( params["is_left_of_center"]):
                         corner_reward=40           
             elif (waypoint > 27 and waypoint < 45) or (waypoint >179 and waypoint< 189 ) or (waypoint >81 and waypoint <87):
+                reward =(params['progress']/params['steps'])*200
                 if steering_angle == 0 or steering_angle == 10:
                     if speed == 4 :
                         bonus = 30
@@ -54,6 +56,7 @@ class Reward:
                 
             elif (waypoint >55 and waypoint< 65 ):
                 if  steering_angle < 0:
+                    reward =(params['progress']/params['steps'])*200
                     if speed  > 3 :
                         bonus = 20
                     elif speed > 2.5:
@@ -70,6 +73,7 @@ class Reward:
                         corner_reward=100
             elif (waypoint > 97 and waypoint < 145):
                 if  steering_angle < -10:
+                    reward =(params['progress']/params['steps'])*200
                     if speed >3:
                         bonus =5 
                     if speed  > 2.5:
@@ -86,6 +90,7 @@ class Reward:
                         corner_reward=100
             elif (waypoint >=65 and waypoint <=81) or (waypoint >=87 and waypoint <=97) :
                 if  steering_angle >= 0:
+                    reward =(params['progress']/params['steps'])*200
                     if speed  > 3 :
                         bonus = 20
                     elif speed > 2.5:
@@ -102,6 +107,7 @@ class Reward:
                         corner_reward=100
             elif (waypoint >=145 and waypoint <=160):
                 if  steering_angle >= 0:
+                    reward =(params['progress']/params['steps'])*200
                     if speed  > 3 :
                         bonus = 10
                     elif speed > 2.5:
@@ -118,6 +124,7 @@ class Reward:
                         corner_reward=100
             else:
                 if  steering_angle >= 0:
+                    reward =(params['progress']/params['steps'])*200
                     if speed ==4:
                         bonus = 25
                     if speed  > 3 :
@@ -151,7 +158,7 @@ class Reward:
                 elif params['steps']<500:
                     steps_reward=10000
                 
-            return   float(0.00001+bonus*10  + corner_reward+ steering_bonus+steps_reward)
+            return   float(0.00001+bonus*10  + reward+ corner_reward+ steering_bonus+steps_reward)
         return (0.00001)
 reward = Reward()
 def reward_function(params):

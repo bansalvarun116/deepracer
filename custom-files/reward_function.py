@@ -97,10 +97,17 @@ class Reward:
             else:
                 self.previous_steering_angle=steering_angle
                 self.count=0
-            if params['progress'] ==100 and params['steps']<450:
-                steps_reward=15000
-            elif params['progress'] ==100 and params['steps']<500:
-                steps_reward=10000
+            if params['progress'] ==100 :
+                if params['steps']<375:
+                    steps_reward=45000
+                elif params['steps']<400:
+                    steps_reward=30000
+                elif params['steps']<450:
+                    steps_reward=20000
+                elif params['steps']<450:
+                    steps_reward=15000
+                elif params['steps']<500:
+                    steps_reward=10000
                 
             return   float(0.00001+bonus*10  + corner_reward + steering_bonus+steps_reward)
         return (0.00001)

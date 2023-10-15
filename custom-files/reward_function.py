@@ -15,7 +15,7 @@ class Reward:
             if waypoint<18 or waypoint>204  or (waypoint>116 and waypoint<131) or (waypoint>160 and waypoint<169):
                 if steering_angle == 0 :
                     if speed == 4 :
-                        bonus = 30
+                        bonus = 25
                     else:
                         bonus = 10
                     if(steering_angle==self.previous_steering_angle):
@@ -31,14 +31,14 @@ class Reward:
                         steering_bonus=10*min(20,self.count)
             elif (waypoint > 28 and waypoint < 44) or (waypoint >180 and waypoint< 189 ):
                 if steering_angle == 0 or steering_angle == 10:
-                    if speed > 3.5 :
-                        bonus = 30
+                    if speed == 4 :
+                        bonus = 25
                     else:
                         bonus = 15
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=10*min(20,self.count)
                 else:
-                    if speed >= 4:
+                    if speed == 4:
                         bonus = 15
                     elif speed>3:
                         bonus = 10
@@ -97,16 +97,16 @@ class Reward:
             else:
                 self.previous_steering_angle=steering_angle
                 self.count=0
-            if params['progress'] ==100:
-                if  params['steps']<375:
-                    steps_reward=25000
-                elif  params['steps']<400:
+            if params['progress'] ==100 :
+                if params['steps']<375:
+                    steps_reward=45000
+                elif params['steps']<400:
+                    steps_reward=30000
+                elif params['steps']<450:
                     steps_reward=20000
-                elif  params['steps']<450:
-                    steps_reward=17500
-                elif  params['steps']<450:
+                elif params['steps']<450:
                     steps_reward=15000
-                elif  params['steps']<500:
+                elif params['steps']<500:
                     steps_reward=10000
                 
             return   float(0.00001+bonus*10  + corner_reward + steering_bonus+steps_reward)

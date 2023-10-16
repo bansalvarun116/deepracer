@@ -13,7 +13,7 @@ class Reward:
             steering_angle = params['steering_angle']
             steps_reward=0
             
-            if waypoint<20 or waypoint>201  or (waypoint>114 and waypoint<134) or (waypoint>159 and waypoint<172) or(waypoint>51 and waypoint<56):
+            if waypoint<20 or waypoint>201  or (waypoint>115 and waypoint<133) or (waypoint>160 and waypoint<172) or(waypoint>51 and waypoint<56):
                 if steering_angle == 0 :
                     if speed == 4 :
                         bonus = 30
@@ -31,9 +31,8 @@ class Reward:
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=20*min(10,self.count)
                 if( params["is_left_of_center"]):
-                        corner_reward=40
-                        
-            elif (waypoint > 27 and waypoint < 45) or (waypoint >179 and waypoint< 189 ) or (waypoint >81 and waypoint <88):
+                        corner_reward=40           
+            elif (waypoint > 27 and waypoint < 45) or (waypoint >179 and waypoint< 189 ) or (waypoint >81 and waypoint <87):
                 if steering_angle == 0 or steering_angle == 10:
                     if speed == 4 :
                         bonus = 30
@@ -69,7 +68,7 @@ class Reward:
                         steering_bonus=20*min(10,self.count)
                     if(not params["is_left_of_center"]):
                         corner_reward=100
-            elif (waypoint > 98 and waypoint < 145):
+            elif (waypoint > 97 and waypoint < 145):
                 if  steering_angle < -10:
                     if speed >3:
                         bonus =5 
@@ -85,24 +84,42 @@ class Reward:
                         steering_bonus=20*min(10,self.count)
                     if(not params["is_left_of_center"]):
                         corner_reward=100
-            elif (waypoint >= 145 and waypoint <= 159):
+            elif (waypoint >=65 and waypoint <=81) or (waypoint >=87 and waypoint <=97) :
                 if  steering_angle >= 0:
-                    if speed >3:
-                        bonus =5 
-                    if speed  > 2.5:
+                    if speed  > 3 :
                         bonus = 20
-                    elif speed >2:
-                        bonus = 18
-                    elif speed >1.5:
-                        bonus = 16
+                    elif speed > 2.5:
+                        bonus = 15
+                    elif speed > 2:
+                        bonus=10
+                    elif speed>1.5:
+                        bonus= 5
                     else:
-                        bonus = 14
+                        bonus = 2
+                    if(steering_angle==self.previous_steering_angle):
+                        steering_bonus=20*min(10,self.count)
+                    if(params["is_left_of_center"]):
+                        corner_reward=100
+            elif (waypoint >=145 and waypoint <=160):
+                if  steering_angle >= 0:
+                    if speed  > 3 :
+                        bonus = 10
+                    elif speed > 2.5:
+                        bonus = 20
+                    elif speed > 2:
+                        bonus=18
+                    elif speed>1.5:
+                        bonus= 15
+                    else:
+                        bonus = 12
                     if(steering_angle==self.previous_steering_angle):
                         steering_bonus=20*min(10,self.count)
                     if(params["is_left_of_center"]):
                         corner_reward=100
             else:
                 if  steering_angle >= 0:
+                    if speed ==4:
+                        bonus = 25
                     if speed  > 3 :
                         bonus = 20
                     elif speed > 2.5:
